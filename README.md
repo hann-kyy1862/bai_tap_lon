@@ -24,7 +24,7 @@
   
     + Huỳnh Trung Nghĩa - MSSV: 6551071057 - Nội dung thực hiện: Code
 
-    + Dư Nguyên An - MSSV: - Nội dung thực hiện: Viết báo cáo phần B
+    + Dư Nguyên An - MSSV: - Nội dung thực hiện: Viết báo cáo
 
 # Bố cục dựa vào đề bài sau
 
