@@ -1,0 +1,4 @@
+| book01   | cau truc du lieu va giai thuat | nguyen van a         | 12/12/1212  | co so      | 120000   VND | 4 |
+| book02   | co so du lieu                  | nguyen van b         | 12/12/1212  | co so      | 150000   VND | 3 |
+| book03   | lap trinh huong doi tuong      | nguyen van c         | 12/12/1212  | co so      | 130000   VND | 4 |
+| book04   | lap trinh python               | nguyen van d         | 12/12/1212  | co so      | 200000   VND | 4 |
