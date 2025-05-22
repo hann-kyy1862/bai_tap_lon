@@ -39,14 +39,14 @@ int main(){
     //giai phong danh sach phieu muon sach
     for(int i = 0; i<q;i++){
         free(pMS[i].MSSV);
-        for(int j = 0;j<pMS[i].soSach;j++)
+        for(int j = 0; j < pMS[i].soSach;j++)
             free(pMS[i].ISBNm[j]);
         free(pMS[i].ISBNm);
     }free(pMS);
     //giai phong danh sach phieu tra sach
-    for(int i =0 ;i<p; i++){
+    for(int i =0 ; i < p; i++){
         free(pTS[i].MSSV);
-        for(int j = 0; j<pTS[i].soST; j++)
+        for(int j = 0; j < pTS[i].soST; j++)
             free(pTS[i].ISBNt[j]);
         free(pTS[i].ISBNt);
     }free(pTS);

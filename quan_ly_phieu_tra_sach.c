@@ -11,7 +11,6 @@ int capNhapPMS(phieuMuonSach **pMS, int *q, char *MSSV, char *ISBNt){
                     free((*pMS)[i].ISBNm[j]);
                     for(int k = j; k < (*pMS)[i].soSach-1; k++)
                         (*pMS)[i].ISBNm[k] = (*pMS)[i].ISBNm[k+1];
-                    free((*pMS)[i].ISBNm[(*pMS)[i].soSach-1]);
                     if(--(*pMS)[i].soSach == 0)
                         xoaPMS(pMS,q,i);
                     return 0;
@@ -95,15 +94,21 @@ void nhapPTS(phieuTraSach **pTS, int *p, sach *dsSach, int m, phieuMuonSach **pM
         printf("Nhap so sach duoc tra: ");
         scanf("%d",&soST);
         while(getchar() != '\n');
-        for(int j = 0; j < soST; j++){
-            printf("Nhap ma sach da tra %d: ", j+1);
-            scanf("%s", ISBNt[j]); getchar();
-            if(capNhapPMS(pMS,q,MSSV,ISBNt[j])){
-                printf("\nKhong tim thay thong tin sach trong phieu muon cua: %s\n", MSSV);
-                return;
-            } 
-            if(capNhatSLS(dsSach, ISBNt[j], m, 1))
-                printf("\nKhong tim thay sach nay o thu vien\n");
+        
+        for(int j = 0; j < soST;){
+            do{
+                printf("Nhap ma sach da tra %d: ", j+1);
+                scanf("%s", ISBNt[j]); getchar();
+                if(capNhapPMS(pMS,q,MSSV,ISBNt[j])){
+                    printf("\nKhong tim thay thong tin sach trong phieu muon cua: %s\n", MSSV);
+                    continue;
+                } 
+                if(capNhatSLS(dsSach, ISBNt[j], m, 1)){
+                    printf("\nKhong tim thay sach nay o thu vien\n");
+                    continue;
+                }else break;
+            }while(1);
+            j++;
         }
         kiemTraXuPhat(ngayTraTT,MSSV,*pMS,*q,ISBNt, soST, dsSach,m,headDG);
         (*pTS)[i] = themPTS(MSSV,ngayTraTT,soST,ISBNt);

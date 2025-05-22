@@ -115,14 +115,15 @@ void nhapPMS(phieuMuonSach **pMS, int *q, docGia **headDG, int *n, sach *dsSach,
                 printf("So sach gioi han 1 lan muon la 1 -> 10 cuon.\nVui long nhap lai!\n");
         }while(soSach < 1 || soSach > 10);
         while(getchar() != '\n');
-        for(int j = 0; j < soSach; j++){
+        for(int j = 0; j < soSach;){
             do{
                 printf("Nhap ma sach da muon %d: ", j+1);
                 scanf("%s", ISBNm[j]); getchar();
-                if(capNhatSLS(dsSach, ISBNm[j], m, 0))
-                    printf("\nISBN khong duoc tim thay. Hay nhap lai!n");
-                else break;
+                if(capNhatSLS(dsSach, ISBNm[j], m, 0)){
+                    printf("\nISBN khong duoc tim thay. Hay nhap lai!n");  
+                }else break;
             }while(1);
+            j++;
         }
         (*pMS)[i] = themPMS(*headDG, MSSV, ngayMuonSach, soSach, ISBNm);
     }// *a = a[0] = b kieu *sach => *(a)[0] = a[0][0] = b[0] kieu sach
@@ -147,7 +148,7 @@ void xuatSachMuon(phieuMuonSach *pMS, int q, sach *dsSach, int m, docGia *headDG
             printf("Ngay muon sach: %02d/%02d/%d\n",pMS[i].ngayMuonSach.ngay, pMS[i].ngayMuonSach.thang, pMS[i].ngayMuonSach.nam);
             printf("Ngay tra sach du kien: %02d/%02d/%d\n",pMS[i].ngayTraDK.ngay, pMS[i].ngayTraDK.thang, pMS[i].ngayTraDK.nam);
             for(int j = 0; j < pMS[i].soSach; j++){
-                printf("\n<<    Thong Tin Sach %d    >>\n",dem++);
+                printf("\n<<    Thong Tin Sach %d    >>\n",++dem);
                 for(int k = 0; k<m; k++){
                     if(soSanhChuoi(pMS[i].ISBNm[j], dsSach[k].ISBN))
                         xuatSach(dsSach[k],0);
