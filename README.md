@@ -12,11 +12,11 @@
 
   Sinh viên lớp: CQ.K65.CNTT - Trường đại học Giao Thông Vận tải phân hiệu TP. Hồ Chí Minh
   
-	+ Huỳnh Trung Nghĩa - MSSV: 6551071057 - Nội dung thực hiện: Code
+   + Huỳnh Trung Nghĩa - MSSV: 6551071057
     
-	+ Võ Hồng Thiên - MSSV: 6551071078 - Nội dung thực hiện:
-  
-	+ Dư Nguyên An - MSSV: 6551071001 
+   + Võ Hồng Thiên - MSSV: 6551071078
+ 
+   + Dư Nguyên An - MSSV: 6551071001 
  
 # Hướng dẫn chạy chương trình;
 
