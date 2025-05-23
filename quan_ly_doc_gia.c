@@ -46,7 +46,7 @@ void nhapDSDG(docGia **headDG, int *n, int dk){
     char hoVaTen[30], MSSV[15], gioiTinh[5];
     date ngaySinh;
     date ngayTaoThe;
-    dk ? printf("\n<<   NHAP THONG TIN DOC GIA   >>\n") : printf("\n<<  NHAP THONG TIN DOC GIA MOI   >>\n");
+    dk ? printf("\n==== NHAP THONG TIN DOC GIA ====\n") : printf("\n==== NHAP THONG TIN DOC GIA MOI ====\n");
     for(int i=0; i<*n; i++){
         printf("\n<<    Thong Tin Doc Gia %d    >>\n",i+1);
         printf("Nhap ho va ten: ");
@@ -142,8 +142,11 @@ void chinhSuaDG(docGia *headDG){
     printf("\nNhap MSSV can chinh sua: ");
     scanf("%s", MSSV);
     while(1){
-        if(strcmp(headDG->MSSV,MSSV) == 0)
+        if(strcmp(headDG->MSSV,MSSV) == 0){
+            tenDG(headDG,MSSV);
             break;
+        }
+            
         headDG = headDG->next;
         if(headDG == NULL){
             printf("MSSV khong ton tai!\n");

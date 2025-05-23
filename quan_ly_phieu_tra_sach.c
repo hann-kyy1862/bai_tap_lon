@@ -9,10 +9,14 @@ int capNhapPMS(phieuMuonSach **pMS, int *q, char *MSSV, char *ISBNt){
             for(int j = 0; j < (*pMS)[i].soSach; j++){
                 if(strcmpi((*pMS)[i].ISBNm[j], ISBNt) == 0){
                     free((*pMS)[i].ISBNm[j]);
+                    (*pMS)[i].ISBNm[j] = NULL;
                     for(int k = j; k < (*pMS)[i].soSach-1; k++)
-                        (*pMS)[i].ISBNm[k] = (*pMS)[i].ISBNm[k+1];
+                        (*pMS)[i].ISBNm[k] = strdup((*pMS)[i].ISBNm[k+1]);
+                    if((*pMS)[i].ISBNm[(*pMS)[i].soSach-1] != NULL)
+                        free((*pMS)[i].ISBNm[(*pMS)[i].soSach-1]);
                     if(--(*pMS)[i].soSach == 0)
                         xoaPMS(pMS,q,i);
+                    ghiFilePM(*pMS, *q);
                     return 0;
                 }
             }
@@ -29,7 +33,7 @@ void kiemTraXuPhat(date ngayTraTT, char *MSSV, phieuMuonSach *pMS, int q, char I
                 for(int k =0; k<pMS[i].soSach; k++){
                     if(soSanhChuoi(ISBNt[j], pMS[i].ISBNm[k])){
                         if(soSanhNgay(ngayTraTT,pMS[i].ngayTraDK)){
-                            !dem++ ? printf("\n=== Danh sach Sach tra tre han ===\n\n") : printf("\n");
+                            !dem++ ? printf("\n<<     Danh sach Sach tra tre han     >>\n") : 0;
                             tenDG(headDG, MSSV);
                             tenSach(dsSach, m, ISBNt[j]);
                             printf("Ngay muon: %02d/%02d/%d - Ngay tra du kien: %02d/%02d/%d\n", pMS[i].ngayMuonSach.ngay, pMS[i].ngayMuonSach.thang, pMS[i].ngayMuonSach.nam, pMS[i].ngayTraDK.ngay, pMS[i].ngayTraDK.thang, pMS[i].ngayTraDK.nam);
@@ -39,6 +43,7 @@ void kiemTraXuPhat(date ngayTraTT, char *MSSV, phieuMuonSach *pMS, int q, char I
                             printf("So tien xu phat: %d * 5000 = %d VND\n", soNgayTre,soNgayTre*5000);
                         }
                     }
+
                 }
             }
         }
@@ -56,7 +61,7 @@ void ghiFilePT(phieuTraSach *pTS, int p){
     for(int i = 0; i<p; i++){
         fprintf(f,"| %-15s | %02d/%02d/%-5d | %d |", pTS[i].MSSV, pTS[i].ngayTraTT.ngay, pTS[i].ngayTraTT.thang, pTS[i].ngayTraTT.nam, pTS[i].soST);
         for(int j = 0; j<pTS[i].soST; j++)
-            fprintf(f," %-15s |", pTS[i].ISBNt[j]);
+            fprintf(f," %-10s |", pTS[i].ISBNt[j]);
         fprintf(f,"\n");
     }
     fclose(f);
@@ -66,7 +71,7 @@ phieuTraSach themPTS(char *MSSV, date ngayTraTT, int soSach, char ISBNt[][15]){
     phieuTraSach pT;
     pT.MSSV = (char*)malloc(strlen(MSSV)+1);
     strcpy(pT.MSSV,MSSV);
-    pT.ngayTraTT.ngay = ngayTraTT.ngay; pT.ngayTraTT.thang = ngayTraTT.thang; pT.ngayTraTT.nam = ngayTraTT.nam;
+    pT.ngayTraTT = ngayTraTT;
     pT.soST = soSach;
     pT.ISBNt = nhapISBN(soSach, ISBNt);
     return pT;
@@ -80,7 +85,7 @@ void nhapPTS(phieuTraSach **pTS, int *p, sach *dsSach, int m, phieuMuonSach **pM
     date ngayTraTT;
     int soST;
     for(int i = *p; i<*p+a; i++){
-        printf("\n=== Phieu Tra Sach %d ===\n", ++dem);
+        printf("\n<<     Phieu Tra Sach %d     >>\n", ++dem);
         do{
             printf("Nhap ma so sinh vien tra sach: ");
             scanf("%s", MSSV);getchar();
@@ -94,27 +99,31 @@ void nhapPTS(phieuTraSach **pTS, int *p, sach *dsSach, int m, phieuMuonSach **pM
         printf("Nhap so sach duoc tra: ");
         scanf("%d",&soST);
         while(getchar() != '\n');
-        
-        for(int j = 0; j < soST;){
-            do{
+        for(int j = 0; j < soST; j++){
+            int xet = 1;
+            do{ 
                 printf("Nhap ma sach da tra %d: ", j+1);
                 scanf("%s", ISBNt[j]); getchar();
-                if(capNhapPMS(pMS,q,MSSV,ISBNt[j])){
-                    printf("\nKhong tim thay thong tin sach trong phieu muon cua: %s\n", MSSV);
-                    continue;
-                } 
-                if(capNhatSLS(dsSach, ISBNt[j], m, 1)){
-                    printf("\nKhong tim thay sach nay o thu vien\n");
-                    continue;
-                }else break;
-            }while(1);
-            j++;
+                for(int h = 0; h < *q; h++){
+                    if(soSanhChuoi(MSSV, (*pMS)[h].MSSV)){
+                       for(int k = 0; k< (*pMS)[h].soSach; k++){
+                            if(strcmpi((*pMS)[h].ISBNm[k], ISBNt[j]) == 0){
+                                xet = 0;
+                                break;
+                            }
+                        } 
+                    }
+                }
+                xet ? printf("\nISBN khong duoc tim thay trong phieu muon sach! Hay nhap lai!\n") : 0;
+            } while(xet);
         }
-        kiemTraXuPhat(ngayTraTT,MSSV,*pMS,*q,ISBNt, soST, dsSach,m,headDG);
         (*pTS)[i] = themPTS(MSSV,ngayTraTT,soST,ISBNt);
+        kiemTraXuPhat(ngayTraTT,MSSV,*pMS,*q,ISBNt, soST, dsSach,m,headDG);
+    }
+    for(int j = 0; j < soST; j++){
+        capNhapPMS(pMS, q,MSSV, ISBNt[j]);
+        capNhatSLS(dsSach, ISBNt[j],m, 1);
     }
     *p += a;
     ghiFilePT(*pTS, *p);
-    ghiFilePM(*pMS, *q);
-    ghiFileSach(dsSach, m);
 }

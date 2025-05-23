@@ -7,7 +7,10 @@ int nhap(char *ten){
     int m;
     do{
         printf("\nNhap so luong %s: ",ten);
-        scanf("%d",&m); getchar();
+        if(scanf("%d",&m) != 1){
+            printf("Loi! Hay thu lai!\n");
+            while(getchar() != '\n');
+        }getchar();
         if(m<=0){
             printf("Loi!!. Vui long nhap lai!\n");
         }
@@ -24,7 +27,7 @@ sach themSach(char *ISBN, char *tenSach, char *tacGia, date ngayXuatBan, char *t
     strcpy(themS.tenSach, tenSach);
     themS.tacGia = (char*)malloc(strlen(tacGia)+1);
     strcpy(themS.tacGia, tacGia);
-    themS.ngayXuatBan.ngay = ngayXuatBan.ngay; themS.ngayXuatBan.thang = ngayXuatBan.thang; themS.ngayXuatBan.nam = ngayXuatBan.nam;
+    themS.ngayXuatBan = ngayXuatBan;
     themS.theLoai = (char*)malloc(strlen(theLoai)+1);
     strcpy(themS.theLoai, theLoai);
     themS.giaSach = giaSach;
@@ -50,7 +53,7 @@ void nhapTTSach(sach **dsSach, int *m){
         printf("Nhap tac gia: ");
         scanf("%[^\n]%*c", tacGia);
         do{
-        printf("Nhap ngay xuat ban: ");
+        printf("Nhap ngay xuat ban (dd/mm/yy): ");
         scanf("%d/%d/%d", &ngayXuatBan.ngay, &ngayXuatBan.thang, &ngayXuatBan.nam); getchar();
         if(ngayXuatBan.ngay < 1 || ngayXuatBan.ngay > 31 || ngayXuatBan.thang < 1 || ngayXuatBan.thang > 12 || ngayXuatBan.nam < 1000)
             printf("Loi! Vui long nhap lai!\n");
@@ -73,7 +76,7 @@ void ghiFileSach(sach *dsSach, int m){
         return;
     }
     for(int i = 0; i<m; i++){
-        fprintf(f,"| %-8s | %-30s | %-20s | %02d/%02d/%-5d | %-10s | %-8d VND | %d |\n",(dsSach+i)->ISBN, (*(dsSach+i)).tenSach, (dsSach+i)->tacGia, dsSach[i].ngayXuatBan.ngay, dsSach[i].ngayXuatBan.thang, dsSach[i].ngayXuatBan.nam, dsSach[i].theLoai, dsSach[i].giaSach, dsSach[i].soLuong);
+        fprintf(f,"| %-8s | %-30s | %-20s | %02d/%02d/%-5d | %-10s | %-8d VND | %02d |\n",(dsSach+i)->ISBN, (*(dsSach+i)).tenSach, (dsSach+i)->tacGia, dsSach[i].ngayXuatBan.ngay, dsSach[i].ngayXuatBan.thang, dsSach[i].ngayXuatBan.nam, dsSach[i].theLoai, dsSach[i].giaSach, dsSach[i].soLuong);
     }fclose(f);
 }
 //ham xuat thong tin 1 sach

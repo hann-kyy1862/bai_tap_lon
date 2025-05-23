@@ -41,8 +41,7 @@ void chonTTSua(docGia *headDG){
                 break;
             case 3:
                 nhapNgay(&ngaySinh, "sinh");
-                headDG->ngaySinh.ngay = ngaySinh.ngay; headDG->ngaySinh.thang = ngaySinh.thang; headDG->ngaySinh.nam = ngaySinh.nam;    
-                printf("=> Sua doi ngay sinh HOAN THANH!\n");
+                headDG->ngaySinh = ngaySinh;
                 break;
             case 4: 
                 printf("Nhap gioi tinh moi: ");
@@ -52,7 +51,8 @@ void chonTTSua(docGia *headDG){
                 break;
             case 5:
                 nhapNgay(&ngayTaoThe,"tao the");
-                headDG->ngayTaoThe.ngay = ngayTaoThe.ngay; headDG->ngayTaoThe.thang = ngayTaoThe.thang; headDG->ngayTaoThe.nam = ngayTaoThe.nam;
+                headDG->ngayTaoThe = ngayTaoThe;
+                headDG->ngayHetHanThe = ngayTaoThe; headDG->ngayHetHanThe.nam += 4;
                 printf("=> Sua doi ngay tao the HOAN THANH!\n");
                 break;
             default: choice = 6;
@@ -195,12 +195,12 @@ void chonCNMTS(phieuMuonSach **pMS, int *q, phieuTraSach **pTS, int *p, docGia *
 }
 //ham in menu cac chuc nang thong ke
 void menuTK(){
-    printf("\n====== THONG KE (DG, SACH, PMS, PTS) ======\n");
+    printf("\n======= THONG KE (DG, SACH, PMS, PTS) =======\n");
     printf("1. Thong ke so luong sach trong thu vien\n");
     printf("2. Thong ke so sach dang duoc muon\n");
     printf("3. Thong ke so luong doc gia qua han tra sach\n");
     printf("4. Thoat!\n");
-    printf("===========================================\n");
+    printf("=============================================\n");
     printf("Moi chon chuc nang: ");
 }
 //ham chon chuc nang thong ke 
@@ -239,7 +239,7 @@ void menuQL(){
     printf("1. Quan ly doc gia\n");
     printf("2. Quan ly sach\n");
     printf("3. Lap phieu muon sach & tra sach\n");\
-    printf("4. Cac thong ke\n");
+    printf("4. Thong ke\n");
     printf("5. Thoat!\n");
     printf("===================================\n");
     printf("Moi chon chuc nang: ");

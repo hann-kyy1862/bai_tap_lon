@@ -50,7 +50,7 @@ void dgTreHan(phieuMuonSach *pMS, int q, docGia *headDG){
     date ngay_hien_tai;
     nhapNgay(&ngay_hien_tai,"hien tai");
     if(soDGTH(pMS,q,ngay_hien_tai))
-        printf("\nSo doc gia qua han tra sach: %d\n", soDGTH(pMS,q,ngay_hien_tai));
+        printf("\n=> So doc gia qua han tra sach: %d\n", soDGTH(pMS,q,ngay_hien_tai));
     else{
         printf("\nKhong co doc gia qua han tra sach!\n");
         return;
@@ -58,15 +58,16 @@ void dgTreHan(phieuMuonSach *pMS, int q, docGia *headDG){
     int dem = 0;
     for(int i = 0; i<q; i++){
         if(soSanhNgay(ngay_hien_tai, pMS[i].ngayTraDK)){
-            printf("\nDoc gia tre han tra sach %d\n\n",++dem);
+            printf("\n<<   Thong Tin Doc Gia Qua Han %d   >>\n",++dem);
             tenDG(headDG,pMS[i].MSSV);
             printf("Ngay muon: %02d/%02d/%d\n", pMS[i].ngayMuonSach.ngay, pMS[i].ngayMuonSach.thang, pMS[i].ngayMuonSach.nam);
             printf("Ngay tra du kien: %02d/%02d/%d\n", pMS[i].ngayTraDK.ngay, pMS[i].ngayTraDK.thang, pMS[i].ngayTraDK.nam);
             printf("So luong: %d\n", pMS[i].soSach);
             printf("Cac ma sach duoc muon: ");
             for(int j = 0; j<pMS[i].soSach; j++){
-                printf("%-6s |%c",pMS[i].ISBNm[j], (j+1)%3==0 ? '\n' : ' ');
+                printf("%-8s |%c",pMS[i].ISBNm[j], (j+1)%3==0 ? '\n' : ' ');
             }
+            printf("\n");
         }
     }
 }
