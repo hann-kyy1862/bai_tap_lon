@@ -18,7 +18,7 @@
  
    + Dư Nguyên An - MSSV: 6551071001 
 
-# Đề bài phần B: Úng dụng
+# Đề bài phần B: Ứng dụng
 
   Thông tin thẻ độc giả cần quản lí bao gồm: họ tên, MSSV, ngày tháng năm sinh, giới tính, ngày lập thẻ và ngày hết hạn của thẻ (48 tháng kể từ ngày lập thẻ).
 
