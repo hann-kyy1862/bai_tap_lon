@@ -2,13 +2,13 @@
 
 # Giới thiệu
 
-  - Yêu cầu:
+  - Yêu cầu của bài tập lớn:
 
     A. Lý thuyết (Hàm, Con trỏ, Con trỏ mảng, Mảng con trỏ, Con trỏ hàm, Cấp phát động, Xử lý tệp, Kiểu cấu trúc, Danh sách liên kết)
 
     B. Ứng dụng xây dựng ứng dụng cho bài toán cụ thể với đầy đủ tính năng cần thiết
     
-  - Project được viết bằng ngôn ngữ C - Thời gian thực hiện từ ngay 08/05/2025 - 22/05/2025
+  - Phần B được viết bằng ngôn ngữ C - Thời gian thực hiện từ ngay 08/05/2025 - 22/05/2025
     
 # Sinh viên thực hiện
 
@@ -26,7 +26,7 @@
 
     + Dư Nguyên An - MSSV: - Nội dung thực hiện: Viết báo cáo
 
-# Bố cục dựa vào đề bài sau
+# Bố cục phần B dựa vào đề bài sau
 
     Đề bài được lấy ý tưởng từ "Đồ án kết thúc học kỳ năm 1 ngành CNTT - Đại học Khoa Học Tự Nhiên" có điều chỉnh.
 
