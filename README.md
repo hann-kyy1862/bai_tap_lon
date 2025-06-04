@@ -62,7 +62,7 @@
 
       b. nhập phiếu trả sách
 
-      c. xem danh sách các sách đang được mượn bởi 1 độc giả theo MSSV (trả sách sẽ trừ đi số lượng sách và ISBN của sách đó ở phiếu mượn và cộng lại số lượng sách ở thư viện)
+      c. xem danh sách các sách đang được mượn bởi 1 độc giả theo MSSV
 
     4. Các thống kê
 
