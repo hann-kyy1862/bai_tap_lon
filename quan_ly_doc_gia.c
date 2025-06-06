@@ -102,7 +102,7 @@ void themDG(docGia **headDG, int *n){
 void xoaDau(docGia **headDG){
     docGia *delDG = *headDG; 
     *headDG = (*headDG)->next;
-    free(delDG);
+    free(delDG); delDG = NULL;
     ghiFileDG(*headDG);
 }
 //ham xoa doc gia giua/cuoi dslk
@@ -111,7 +111,7 @@ void xoaGiua_Cuoi(docGia **headDG, docGia *delDG){
     while(tmp1->next != delDG)
         tmp1 = tmp1->next;
     tmp1->next = delDG->next;
-    free(delDG);
+    free(delDG); delDG = NULL;
     ghiFileDG(*headDG);
 }
 //(*)ham xoa the doc gia
@@ -137,6 +137,10 @@ void xoaDG(docGia **headDG, char *MSSV, int *n){
 }
 //(*)ham chinh sua thong tin doc gia
 void chinhSuaDG(docGia *headDG){
+    if(headDG == NULL){
+        printf("Danh sach doc gia rong! Khong the chinh sua thong tin!\n");
+        return;
+    }
     docGia *tmp = headDG;
     char MSSV[15];
     printf("\nNhap MSSV can chinh sua: ");
@@ -146,7 +150,6 @@ void chinhSuaDG(docGia *headDG){
             tenDG(headDG,MSSV);
             break;
         }
-            
         headDG = headDG->next;
         if(headDG == NULL){
             printf("MSSV khong ton tai!\n");

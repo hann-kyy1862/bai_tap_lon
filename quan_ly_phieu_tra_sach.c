@@ -119,10 +119,10 @@ void nhapPTS(phieuTraSach **pTS, int *p, sach *dsSach, int m, phieuMuonSach **pM
         }
         (*pTS)[i] = themPTS(MSSV,ngayTraTT,soST,ISBNt);
         kiemTraXuPhat(ngayTraTT,MSSV,*pMS,*q,ISBNt, soST, dsSach,m,headDG);
-    }
-    for(int j = 0; j < soST; j++){
-        capNhapPMS(pMS, q,MSSV, ISBNt[j]);
-        capNhatSLS(dsSach, ISBNt[j],m, 1);
+        for(int j = 0; j < soST; j++){
+            capNhapPMS(pMS, q,MSSV, ISBNt[j]);
+            capNhatSLS(dsSach, ISBNt[j],m, 1);
+        }
     }
     *p += a;
     ghiFilePT(*pTS, *p);
